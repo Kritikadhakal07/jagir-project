@@ -21,11 +21,10 @@
             </ul>
           </div>
         @endif
-
         <form action="{{ route('addUser') }}" method="POST">
+        
           @csrf
 
-        
           <div class="mb-3">
             <label for="firstName" class="form-label">First Name</label>
             <input type="text" value="{{ old('first_name') }}" class="form-control @error('first_name') is-invalid @enderror" id="firstName" name="first_name" placeholder="Enter your first name" required>
@@ -50,7 +49,6 @@
             @enderror
           </div>
 
-         
           <div class="mb-3">
             <label class="form-label">Gender</label>
             <select class="form-select @error('gender') is-invalid @enderror" id="gender" name="gender" required>
@@ -64,26 +62,19 @@
             @enderror
           </div>
 
-          <div class="mb-3">
-            <label for="country" class="form-label">Country of Residence</label>
-            <select class="form-select @error('country') is-invalid @enderror" id="country" name="country" required>
-              @forelse ($countries as $country)
-                  <option value="{{ $country->id }}">{{ $country->name }} - {{ $country->code }}</option>
-              @empty
-                  <option disabled>No countries available</option>
-              @endforelse
-          </select>
-          
+          {{-- <div class="mb-3">
+            <label for="country">Select Country:</label>
+            <select name="country" id="country" class="form-control">
+              <option value="">Select Country</option>
+              @foreach ($countries as $country)
+                  <option value="{{ $country['iso_3166_1_alpha2'] }}">{{ $country['name'] }}</option>
+              @endforeach
+            </select>
             @error('country')
                 <span class="text-danger">{{ $message }}</span>
             @enderror
-        </div>
-        
-        
-        
-        
+          </div> --}}
 
-         
           <div class="mb-3">
             <label for="email" class="form-label">Email</label>
             <input type="email" value="{{ old('email') }}" class="form-control @error('email') is-invalid @enderror" id="email" name="email" placeholder="Enter your email" required>
@@ -92,7 +83,6 @@
             @enderror
           </div>
 
-        
           <div class="mb-3">
             <label for="password" class="form-label">Password</label>
             <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password" placeholder="Enter a strong password" required>
@@ -107,33 +97,16 @@
             @error('password_confirmation')
                 <span class="text-danger">{{ $message }}</span>
             @enderror
-        </div>
-
-        <div class="mb-3">
-          <label for="privacy-consent" class="form-label"></label>
-          <div class="form-check">
-              <input class="form-check-input @error('privacy_consent') is-invalid @enderror" type="checkbox" value="1" id="privacy-consent" name="privacy_consent" required>
-              <label class="form-check-label" for="privacy-consent">
-                  I agree to the <a href="{{ route('privacy-policy') }}" target="_blank">Privacy Policy and terms and condition</a>.
-              </label>
           </div>
-          @error('privacy_consent')
-              <span class="text-danger">{{ $message }}</span>
-          @enderror
-      </div>
-      
-      
-        
 
-         
           <div class="d-grid">
             <button type="submit" class="btn btn-primary">Sign Up</button>
           </div>
         </form>
       </div>
-      <div class="mt-3 text-center">
+      {{-- <div class="mt-3 text-center">
         <a href="{{ route('login') }}">Already have an account? Login </a>
-    </div>
+      </div> --}}
     </div>
   </div>
 

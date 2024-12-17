@@ -22,5 +22,10 @@ class RcInformationService
         return RcInformation::create($data);
     }
 
+    public function updateRcInformation($rcInformation, $data)
+{
+    $rcInformation->update($data);
+}
+
     
 }

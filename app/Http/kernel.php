@@ -43,7 +43,7 @@ class Kernel extends HttpKernel
         'api' => [
             EnsureFrontendRequestsAreStateful::class,  
             'throttle:api',
-            SubstituteBindings::class,  re
+            SubstituteBindings::class,
         ],
     ];
 
@@ -62,5 +62,6 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \App\Http\Middleware\EnsureEmailIsVerified::class,
+        'auth.session' => \App\Http\Middleware\CheckSessionToken::class,  // Add custom session middleware here
     ];
 }

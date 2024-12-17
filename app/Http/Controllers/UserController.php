@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\UserRequest;
-use App\Http\Requests\LoginRequest;
-use App\Services\UserService;
 use App\Traits\ApiResponse;
+use App\Services\UserService;
 use Illuminate\Http\JsonResponse;
+
+use App\Http\Requests\UserRequest;
 use Webpatser\Countries\Countries;
+use App\Http\Requests\LoginRequest;
+use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
 {
@@ -20,7 +22,7 @@ class UserController extends Controller
         $this->userService = $userService;
     }
 
-    public function addUser(UserRequest $request): JsonResponse
+    public function addUser(UserRequest $request)
     {
         $data = $request->validated();
         $user = $this->userService->register($data);
@@ -28,30 +30,32 @@ class UserController extends Controller
         return $this->success($user, 'User registered successfully!');
     }
 
-    public function login(LoginRequest $request): JsonResponse
+    public function login(LoginRequest $request)
     {
-        $user = $this->userService->authenticate($request->validated());
+        $userService = new UserService();
+    $user = $userService->authenticate($request->validated());
 
-       
-        if ($user) {
-            
-            $redirectUrl = route('profile.form');
-            return response()->json([
-                'success' => true,
-                'message' => 'Login successful!',
-                'data' => [
-                    'user' => $user['user'],
-                    'token' => $user['token'],
-                    'redirect_url' => $redirectUrl
-                ]
-            ]);
-        }
+    //dd($user); 
 
-        return response()->json([
-            'success' => false,
-            'message' => 'Invalid credentials.'
-        ], 401);
+    if ($user) {
+        $token = $user['token'];
+        Session::put('user_token', $token); 
+
+        //dd(Session::get('user_token')); 
+
+       return redirect()->route('profile.form')->with('status', 'Login successful!');
+    // return view('profile-form');
     }
+
+    return redirect()->route('login')->withErrors(['message' => 'Invalid credentials.']);
+       
+    }
+
+    public function showLoginForm()
+    {
+        return view('login'); 
+    }
+    
 
     // public function create()
     // {

@@ -18,7 +18,8 @@ return new class extends Migration
             $table->text('rcFullAddress');
             $table->text('rcSkillSetTags'); 
             
-            $table->text('rcBio')->nullable();$table->string('rcCurrentJob')->nullable();
+            $table->text('rcBio')->nullable();
+            $table->string('rcCurrentJob')->nullable();
             $table->string('rcCurrentEmployer')->nullable();
             $table->string('rcLastJob')->nullable();
             $table->string('rcLastEmployer')->nullable();

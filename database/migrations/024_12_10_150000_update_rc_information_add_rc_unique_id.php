@@ -11,9 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        if (!Schema::hasColumn('rc_information', 'rcYearsOfExperience')) {
+        // Add the rcUniqueId column if it doesn't already exist
+        if (!Schema::hasColumn('rc_information', 'rcUniqueId')) {
             Schema::table('rc_information', function (Blueprint $table) {
-                $table->integer('rcYearsOfExperience')->nullable()->default(0)->after('rcSkillSetTags');
+                $table->string('rcUniqueId')->unique()->after('rcSkillSetTags');
             });
         }
     }
@@ -23,9 +24,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        if (Schema::hasColumn('rc_information', 'rcYearsOfExperience')) {
+        if (Schema::hasColumn('rc_information', 'rcUniqueId')) {
             Schema::table('rc_information', function (Blueprint $table) {
-                $table->dropColumn('rcYearsOfExperience');
+                $table->dropColumn('rcUniqueId');
             });
         }
     }

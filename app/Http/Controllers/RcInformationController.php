@@ -6,6 +6,7 @@ use App\Http\Requests\StoreRcInformationRequest;
 use App\Models\RcInformation;
 use App\Services\RcInformationService;
 use Illuminate\Http\Request;
+use Ramsey\Uuid\Uuid;
 
 class RcInformationController extends Controller
 {
@@ -14,28 +15,38 @@ class RcInformationController extends Controller
     public function __construct(RcInformationService $rcInformationService)
     {
         $this->rcInformationService = $rcInformationService;
+
     }
+    public function store(StoreRcInformationRequest $request)
+{
+    $data = $request->validated(); 
+    
+    
+    if (isset($data['rcRole']) && is_array($data['rcRole'])) {
+        $data['rcRole'] = implode(',', $data['rcRole']);
+    }
+    
+    $uniqueId = Uuid::uuid4()->toString();
+
+    while (RcInformation::where('rcUniqueId', $uniqueId)->exists()) {
+        $uniqueId = Uuid::uuid4()->toString(); 
+    }
+
+    $data['rcUniqueId'] = $uniqueId;
+
+    \Log::info('Storing RC Information:', $data); 
+    $this->rcInformationService->storeRcInformation($data); 
+   
+
+  
+    return redirect()->route('profile.form')->with('success', 'The form has been successfully added!');
+}
+
 
     public function create()
     {
         return view('profile-form');
     }
 
-    public function store(StoreRcInformationRequest $request)
-    {
-        $data = $request->validated();
- 
-        
 
-        \Log::info($data);
-
-        $rcInformation = $this->rcInformationService->storeRcInformation($data);
-
-        return redirect()->route('profile.success')->with('status', 'Profile created successfully!');
-    }
-
-    public function submitForm(Request $request)
-    {
-        return redirect()->route('dashboard')->with('status', 'Form submitted successfully!');
-    }
 }

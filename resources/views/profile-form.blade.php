@@ -1,5 +1,6 @@
 @extends('layouts.app')
 
+
 @section('content')
 <div class="container mt-5">
     <div class="row">
@@ -37,6 +38,13 @@
                 @if (session('status'))
                 <div class="alert alert-success">{{ session('status') }}</div>
             @endif
+
+            @if(session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
+
         
                 <div class="card-body">
                     <form action="{{ route('profile.submit') }}" method="POST" enctype="multipart/form-data">
@@ -84,7 +92,7 @@
                         
                         <div class="mb-3">
                             <label for="bio" class="form-label">Bio (Max 500 characters)</label>
-                            <textarea name="rcbio" id="bio" class="form-control @error('bio') is-invalid @enderror" rows="3" maxlength="500" placeholder="Write a short bio about yourself">{{ old('rcbio') }}</textarea>
+                            <textarea name="rcBio" id="bio" class="form-control @error('bio') is-invalid @enderror" rows="3" maxlength="500" placeholder="Write a short bio about yourself">{{ old('rcbio') }}</textarea>
                             @error('bio')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
@@ -121,36 +129,29 @@
                         <h6 class="mt-4 mb-3">Portfolio</h6>
                         <div class="mb-3">
                             <label for="portfolio" class="form-label">Portfolio Links</label>
-                            <input type="text" name="rcLinktoPortofoliio" id="portfolio" class="form-control @error('rcLinktoPortofoliio') is-invalid @enderror" placeholder="e.g., https://yourportfolio.com" value="{{ old('rcLinktoPortofoliio') }}">
-                            @error('rcLinktoPortofoliio')
+                            <input type="text" name="rcLinktoPortfolio" id="portfolio" class="form-control @error('rcLinktoPortofolio') is-invalid @enderror" placeholder="e.g., https://yourportfolio.com" value="{{ old('rcLinktoPortofoliio') }}">
+                            @error('rcLinktoPortfolio')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                         <h6 class="mt-4 mb-3">Interest in Roles</h6>
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" name="rcRole[]" value="Full-time RC" id="full_time" @if(in_array('Full-time RC', old('rcRole', []))) checked @endif>
-                            <label class="form-check-label" for="full_time">
-                                Full-time RC 
-                            </label>
+                            <label class="form-check-label" for="full_time">Full-time RC</label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" name="rcRole[]" value="Part-time RC" id="part_time" @if(in_array('Part-time RC', old('rcRole', []))) checked @endif>
-                            <label class="form-check-label" for="part_time">
-                                Part-time RC 
-                            </label>
+                            <label class="form-check-label" for="part_time">Part-time RC</label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" name="rcRole[]" value="Intern RC" id="intern" @if(in_array('Intern RC', old('rcRole', []))) checked @endif>
-                            <label class="form-check-label" for="intern">
-                                Intern RC 
-                            </label>
+                            <label class="form-check-label" for="intern">Intern RC</label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" name="rcRole[]" value="All of the above" id="all_roles" @if(in_array('All of the above', old('rcRole', []))) checked @endif>
-                            <label class="form-check-label" for="all_roles">
-                                All of the above
-                            </label>
+                            <label class="form-check-label" for="all_roles">All of the above</label>
                         </div>
+                        
                           <h6 class="mt-4 mb-3">Remote Colleague Partner</h6>
                 <div class="mb-3">
                     <label for="communication" class="form-label">Communication with Colleagues (Max 600 characters)</label>
@@ -161,7 +162,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="daily_routine" class="form-label">Daily Routine in Last Job (Max 600 characters)</label>
-                    <textarea name="rcDailyRoutineQues" id="daily_routine" class="form-control @error('rcDailyRoutineQues') is-invalid @enderror" rows="3" maxlength="600" placeholder="Describe how you started and ended your day in your last job">{{ old('rcDailyRoutineQues') }}</textarea>
+                    <textarea name="rcDaytoDayQues" id="rcDaytoDayQues" class="form-control @error('rcDailyRoutineQues') is-invalid @enderror" rows="3" maxlength="600" placeholder="Describe how you started and ended your day in your last job">{{ old('rcDailyRoutineQues') }}</textarea>
                     @error('rcDailyRoutineQues')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -269,3 +270,20 @@
     </div>
 </div>
 @endsection
+<!-- Include Tagify CSS and JS -->
+<link href="https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@yaireo/tagify"></script>
+
+<script>
+    // Initialize Tagify on the rcSkillSetTags input field
+    var input = document.querySelector('#rcSkillSetTags');
+    var tagify = new Tagify(input, {
+        maxTags: 10, // Maximum of 10 tags
+        delimiters: ",", // Separate tags by commas
+        whitelist: [], // Optional: Add predefined suggestions
+        dropdown: {
+            enabled: 0 // Disable suggestions dropdown
+        }
+    });
+</script>
+

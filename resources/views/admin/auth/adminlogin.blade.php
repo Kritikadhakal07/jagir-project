@@ -10,7 +10,7 @@
     <div class="container mt-5">
         <div class="row justify-content-center">
             <div class="col-md-6">
-                <h2 class="text-center mb-4">User Login</h2>@if ($errors->any())
+                <h2 class="text-center mb-4">Admin Login</h2>@if ($errors->any())
                 <div class="alert alert-danger">
                     <ul>
                         @foreach ($errors->all() as $error)
@@ -21,10 +21,13 @@
             @endif
             
 
+            
+            
                 
-                <form action=" {{ route('loginUser') }} " method="POST">
+                <form action=" {{ route('admin.login') }} " method="POST">
                     @csrf
                     
+
                     <div class="mb-3">
                         <label for="email" class="form-label">Email</label>
                         <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" id="email" placeholder="Enter your email" value="{{ old('email') }}" required>
@@ -53,9 +56,6 @@
             </div>
         </div>
     </div>
-    {{-- <div class="mt-3 text-center">
-        <a href="{{ route('login') }}">Don't have an account? Signup</a>
-      </div> --}}
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
    

@@ -1,14 +1,17 @@
 <?php
-
 namespace App\Services;
 
 use App\Models\Signup;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class UserService
 {
-   
+    /**
+     * Register a new user.
+     *
+     * @param array $data
+     * @return Signup
+     */
     public function register(array $data): Signup
     {
         return Signup::create([
@@ -17,22 +20,28 @@ class UserService
             'date_of_birth' => $data['date_of_birth'],
             'gender' => $data['gender'],
             'email' => $data['email'],
-            'password' => Hash::make($data['password']), 
-            'privacy_consent' => $data['privacy_consent'],
+            'password' => Hash::make($data['password']),
         ]);
     }
 
-    public function authenticate(array $credentials)
+    /**
+     * Authenticate a user based on provided credentials.
+     *
+     * @param array $credentials
+     * @return array|null
+     */
+    public function authenticate(array $credentials): ?array
     {
-        $user = Signup::where('email', $credentials['email'])->first(); 
-    
-        if ($user && Hash::check($credentials['password'], $user->password)) { 
-            $token = $user->createToken('YourAppName')->plainTextToken; 
+        $user = Signup::where('email', $credentials['email'])->first();
+        //dd($user);
+        if ($user && Hash::check($credentials['password'], $user->password)) {
+            $token = $user->createToken('YourAppName')->plainTextToken;
             return ['user' => $user, 'token' => $token];
         }
-    
-        return null; 
-    }
-    
 
+       
+        \Log::warning('Invalid login attempt with email: ' . $credentials['email']);
+
+        return null;
+    }
 }

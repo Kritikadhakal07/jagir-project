@@ -75,6 +75,16 @@
             @enderror
           </div> --}}
 
+          <label for="country">Select Country:</label>
+          <select name="country" id="country" class="form-control">
+            <option value="">Select Country</option>
+            @foreach ($countries as $country)
+                <option value="{{ $country['iso_3166_1_alpha2'] }}">{{ $country['name'] }}</option>
+            @endforeach
+        </select>
+        
+        
+
           <div class="mb-3">
             <label for="email" class="form-label">Email</label>
             <input type="email" value="{{ old('email') }}" class="form-control @error('email') is-invalid @enderror" id="email" name="email" placeholder="Enter your email" required>

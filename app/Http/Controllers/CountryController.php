@@ -1,36 +1,17 @@
 <?php
-
-  
-
 namespace App\Http\Controllers;
 
-  
-
 use Illuminate\Http\Request;
-
-use App\Models\Country;
-
-  
+use Rinvex\Country\CountryLoader;
 
 class CountryController extends Controller
-
 {
 
-    /**
+    public function showSignupForm()
+{
+    $countries = CountryLoader::countries(); // Load countries
+    return view('signup', compact('countries'));
+}
 
-     * Write code on Method
-
-     *
-
-     * @return response()
-
-     */
-
-     public function showSignupForm()
-     {
-         $countries = Country::all(); 
-        //    dd($countries); 
-         return view('signup', compact('countries'));
-     }
-
+    
 }

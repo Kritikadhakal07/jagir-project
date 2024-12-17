@@ -29,7 +29,7 @@ class RcInformation extends Model
         'rcCurrentEmployer',
         'rcLastJob',
         'rcLastEmployer',
-        'rcLinktoPortofoliio',
+        'rcLinktoPortfolio',
         'rcCommunicationQues',
         'rcDaytoDayQues',
         'rcChallengeQues',

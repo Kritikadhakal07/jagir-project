@@ -129,7 +129,7 @@
                         <h6 class="mt-4 mb-3">Portfolio</h6>
                         <div class="mb-3">
                             <label for="portfolio" class="form-label">Portfolio Links</label>
-                            <input type="text" name="rcLinktoPortfolio" id="portfolio" class="form-control @error('rcLinktoPortofolio') is-invalid @enderror" placeholder="e.g., https://yourportfolio.com" value="{{ old('rcLinktoPortofoliio') }}">
+                            <input type="text" name="rcLinktoPortfolio" id="portfolio" class="form-control @error('rcLinktoPortfolio') is-invalid @enderror" placeholder="e.g., https://yourportfolio.com" value="{{ old('rcLinktoPortofoliio') }}">
                             @error('rcLinktoPortfolio')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
@@ -262,6 +262,7 @@
                         
                         <div class="text-end mt-4">
                             <button type="submit" class="btn btn-primary">Save Profile</button>
+                            <a href="edit_form/{{}}"> <button>Edit</button></a>
                         </div>
                     </form>
                 </div>

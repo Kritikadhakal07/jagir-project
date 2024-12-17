@@ -6,9 +6,20 @@ use App\Http\Middleware\AdminMiddleware;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RcInformationController;
 use App\Http\Controllers\CountryController;
+use App\Http\Controllers\SignupController;
+
+Route::get('/signup', [SignupController::class, 'showSignupForm'])->name('signup.form');
+
+use Rinvex\Countries\Facades\Country;
 use Illuminate\Support\Facades\Route;
 
 
+
+
+Route::get('/signup', [UserController::class, 'showSignupForm'])->name('signup.form');
+
+//Route::get('signup', [CountryController::class, 'showSignupForm'])->name('signup.form'); // Route to show the signup form with countries dropdown
+Route::post('signup', [CountryController::class, 'storeSignup'])->name('signup.submit'); // Route to handle the signup form submission
 
 Route::get('/signup', [CountryController::class, 'showSignupForm'])->name('signup');
 Route::post('/signup', [UserController::class, 'addUser'])->name('addUser');

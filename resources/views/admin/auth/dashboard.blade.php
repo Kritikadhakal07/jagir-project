@@ -36,7 +36,7 @@
                 <th>Updated At</th>
                 <th>Role</th>
                 <th>RC Unique ID</th>
-                <th>Actions</th>
+                
             </tr>
         </thead>
         <tbody>
@@ -51,13 +51,13 @@
                     <td>{{ $rcInformation->rcPhoneNumber }}</td>
                     <td>{{ $rcInformation->rcFullAddress }}</td>
                     <td>{{ $rcInformation->rcSkillSetTags }}</td>
-                    <td>{{ $rcInformation->rcSkillSetYears }}</td>
+                    <td>{{ $rcInformation->rcYearsOfExperience }}</td>
                     <td>{{ $rcInformation->rcBio }}</td>
                     <td>{{ $rcInformation->rcCurrentJob }}</td>
                     <td>{{ $rcInformation->rcCurrentEmployer }}</td>
                     <td>{{ $rcInformation->rcLastJob }}</td>
                     <td>{{ $rcInformation->rcLastEmployer }}</td>
-                    <td>{{ $rcInformation->rcLinktoPortofoliio }}</td>
+                    <td>{{ $rcInformation->rcLinktoPortfolio }}</td>
                     <td>{{ $rcInformation->rcCommunicationQues }}</td>
                     <td>{{ $rcInformation->rcDaytoDayQues }}</td>
                     <td>{{ $rcInformation->rcChallengeQues }}</td>
@@ -70,8 +70,8 @@
                     <td>
                         <img src="{{ asset('storage/' . $rcInformation->rcPhoto) }}" alt="User Photo" class="img-fluid" width="100">
                     </td>
-                    <td>{{ $rcInformation->rcCreated }}</td>
-                    <td>{{ $rcInformation->rcUpdated}}</td>
+                    <td>{{ $rcInformation->created_at }}</td>
+                    <td>{{ $rcInformation->updated_at}}</td>
                     <td>{{ $rcInformation->rcRole }}</td>
                     <td>{{ $rcInformation->rcUniqueId }}</td>
                     <td>

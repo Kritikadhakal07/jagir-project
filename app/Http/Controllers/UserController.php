@@ -4,10 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Traits\ApiResponse;
 use App\Services\UserService;
-use Illuminate\Http\JsonResponse;
+// use Illuminate\Http\JsonResponse;
 
 use App\Http\Requests\UserRequest;
-use Webpatser\Countries\Countries;
+use Rinvex\Country\CountryLoader;
 use App\Http\Requests\LoginRequest;
 use Illuminate\Support\Facades\Session;
 
@@ -24,7 +24,7 @@ class UserController extends Controller
 
     public function addUser(UserRequest $request)
     {
-        $data = $request->validated();
+        // $data = $request->validated();
         $user = $this->userService->register($data);
     
         return $this->success($user, 'User registered successfully!');
@@ -54,6 +54,14 @@ class UserController extends Controller
     public function showLoginForm()
     {
         return view('login'); 
+    }
+
+    public function showSignupForm()
+    {
+        // Load countries data
+        $countries = CountryLoader::countries(); // This returns an array of countries
+
+        return view('signup', compact('countries'));
     }
     
 

@@ -24,9 +24,9 @@ class UserController extends Controller
 
     public function addUser(UserRequest $request)
     {
-        // $data = $request->validated();
+         $data = $request->validated();
         $user = $this->userService->register($data);
-    
+        
         return $this->success($user, 'User registered successfully!');
     }
 

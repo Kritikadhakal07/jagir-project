@@ -19,7 +19,9 @@ class UserService
             'last_name' => $data['last_name'],
             'date_of_birth' => $data['date_of_birth'],
             'gender' => $data['gender'],
+            'country'=>$data['country'],
             'email' => $data['email'],
+          
             'password' => Hash::make($data['password']),
         ]);
     }

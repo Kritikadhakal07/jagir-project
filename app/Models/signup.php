@@ -16,6 +16,7 @@ class Signup extends Authenticatable
         'last_name',
         'date_of_birth',
         'gender',
+        'country',
         'email',
         'password',
     ];

@@ -19,13 +19,14 @@ class UserRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
-    public function rules(): array
+    public function rules()
     {
         return [
             'first_name' => 'required|string|regex:/^[a-zA-Z\s]+$/',
             'last_name' => 'required|string|regex:/^[a-zA-Z\s]+$/',
             'date_of_birth' => 'required|date|before:today',
             'gender' => 'required|in:male,female,other',
+            'country' => 'required|string', 
             'email' => 'required|email|unique:users,email',
             'password' => [
                 'required',
@@ -39,6 +40,7 @@ class UserRequest extends FormRequest
             'password_confirmation' => 'required|same:password',
         ];
     }
+    
     
   
     public function messages()

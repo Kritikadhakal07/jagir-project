@@ -62,27 +62,23 @@
             @enderror
           </div>
 
-          {{-- <div class="mb-3">
-            <label for="country">Select Country:</label>
-            <select name="country" id="country" class="form-control">
-              <option value="">Select Country</option>
-              @foreach ($countries as $country)
-                  <option value="{{ $country['iso_3166_1_alpha2'] }}">{{ $country['name'] }}</option>
-              @endforeach
-            </select>
-            @error('country')
-                <span class="text-danger">{{ $message }}</span>
-            @enderror
-          </div> --}}
+          <div class="mb-3">
+           
+           
+          
 
           <label for="country">Select Country:</label>
-          <select name="country" id="country" class="form-control">
-            <option value="">Select Country</option>
-            @foreach ($countries as $country)
-                <option value="{{ $country['iso_3166_1_alpha2'] }}">{{ $country['name'] }}</option>
-            @endforeach
-        </select>
-        
+    <select name="country" id="country" class="form-control">
+    <option value="">Select Country</option>
+    @foreach ($countries as $country)
+        <option value="{{ $country['iso_3166_1_alpha2'] }}">{{ $country['name'] }}</option>
+    @endforeach
+</select>
+@error('country')
+<span class="text-danger">{{ $message }}</span>
+@enderror
+          </div>
+
         
 
           <div class="mb-3">
